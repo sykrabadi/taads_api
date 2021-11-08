@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+APPEND_SLASH = False
 
 # Application definition
 
@@ -48,7 +49,7 @@ REST_FRAMEWORK = {
 }
 SPECTACULAR_SETTINGS = {
     'TITLE': 'E-Bike API',
-    'DESCRIPTION': 'Just a normal API',
+    'DESCRIPTION': 'API untuk tugas akhir mata kuliah analisis dan desain sistem',
     'VERSION': '1.0.0',
     'SCHEMA_PATH_PREFIX': None,
     # OTHER SETTINGS

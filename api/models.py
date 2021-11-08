@@ -19,6 +19,7 @@ class Station(models.Model):
 
 class Cycle(models.Model):
     cycle_id = models.BigAutoField(primary_key=True)
+    borrowed_status = models.BooleanField(default=False)
     borrowed_user = models.OneToOneField(User, on_delete=models.CASCADE)
     station_id = models.ForeignKey(Station, on_delete=models.CASCADE)
 

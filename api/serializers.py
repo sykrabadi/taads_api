@@ -9,8 +9,11 @@ class UserSerializer(serializers.ModelSerializer):
         fields = [
             'user_id',
             'username',
+            'password',
             'date_created',
         ]
+
+
 class StationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Station
@@ -18,6 +21,8 @@ class StationSerializer(serializers.ModelSerializer):
             'station_id',
             'station_name',
         ]
+
+        
 class CycleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cycle

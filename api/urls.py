@@ -3,7 +3,10 @@ from . import views
 
 
 urlpatterns = [
-    path("users/", views.UsersList.as_view()),
-    path("stations/", views.StationsList.as_view()),
-    path("cycles/", views.CyclesList.as_view()),
+    path("users/", views.get_user),
+    path("users/<int:pk>", views.get_user_by_id),
+    path("users/register", views.register),
+    path("users/delete/<int:pk>", views.delete_user),
+    path("station/", views.get_station),
+    path("cycle/", views.get_cycle)
 ]
