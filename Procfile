@@ -1,0 +1,1 @@
+web: gunicorn ads_api.wsgi
