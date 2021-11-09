@@ -1,4 +1,5 @@
-from rest_framework import generics, permissions
+from django.views import generic
+from rest_framework import generics, permissions, mixins
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
@@ -9,6 +10,30 @@ import datetime
 from django.contrib.auth.hashers import make_password
 # import jwt
 # Create your views here.
+
+class Users(mixins.CreateModelMixin, mixins.ListModelMixin, generics.GenericAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+class UserDetail(generics.RetrieveAPIView, generics.DestroyAPIView, mixins.CreateModelMixin, generics.GenericAPIView):
+    lookup_field = 'user_id'
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+class Cycles(mixins.CreateModelMixin, mixins.ListModelMixin, generics.GenericAPIView):
+    pass
 
 @api_view(['GET'])
 def get_user(requets):
@@ -24,7 +49,7 @@ def get_user_by_id(request, pk):
 
 @api_view(['POST'])
 def register(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         serializer = UserSerializer(data=request.data)
         password = make_password(request.data['password'])
         if serializer.is_valid():
