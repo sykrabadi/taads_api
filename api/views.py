@@ -22,7 +22,7 @@ def get_user_by_id(request, pk):
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
 
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
 def register(request):
     if request.method == "POST":
         serializer = UserSerializer(data=request.data)
