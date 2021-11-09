@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 class User(models.Model):
     user_id = models.BigAutoField(primary_key=True)
-    password = models.CharField(max_length=16)
     username = models.CharField(max_length=256)
+    password = models.CharField(max_length=16)
     date_created = models.DateField(auto_now_add=True)
 
     def __repr__(self):
@@ -19,6 +19,7 @@ class Station(models.Model):
 
 class Cycle(models.Model):
     cycle_id = models.BigAutoField(primary_key=True)
+    borrowed_status = models.BooleanField(default=False)
     borrowed_user = models.OneToOneField(User, on_delete=models.CASCADE)
     station_id = models.ForeignKey(Station, on_delete=models.CASCADE)
 
