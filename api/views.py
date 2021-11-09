@@ -24,12 +24,11 @@ def get_user_by_id(request, pk):
 
 @api_view(['POST'])
 def register(request):
-    if request.method == 'POST':
-        serializer = UserSerializer(data=request.data)
-        password = make_password(request.data['password'])
-        if serializer.is_valid():
-            serializer.save(password=password)
-            return Response(serializer.data)
+    serializer = UserSerializer(data=request.data)
+    password = make_password(request.data['password'])
+    if serializer.is_valid():
+        serializer.save(password=password)
+        return Response(serializer.data)
 
 @api_view(['POST'])
 def login(request):
